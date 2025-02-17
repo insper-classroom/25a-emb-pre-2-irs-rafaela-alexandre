@@ -33,7 +33,7 @@ int main() {
       printf("fall\n");
       flag_fall = 0;
     }else if(flag_rise){
-      printf("raise\n");
+      printf("rise\n");
       flag_rise = 0;
     }
   }
