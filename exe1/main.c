@@ -6,7 +6,7 @@ const int BTN_PIN_R = 28;
 volatile int flag_fall;
 volatile int flag_rise;
 
-
+// Comentário
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
