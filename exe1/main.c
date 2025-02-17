@@ -3,12 +3,16 @@
 #include <stdio.h>
 
 const int BTN_PIN_R = 28;
+volatile int flag_fall;
+volatile int flag_rise;
+
+
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
-    printf("fall \n");
+    flag_fall = 1;
   } else if (events == 0x8) { // rise edge
-    printf("rise \n");
+    flag_rise = 1;
   }
 }
 
@@ -21,6 +25,12 @@ int main() {
 
   gpio_set_irq_enabled_with_callback(
       BTN_PIN_R, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
+  
+  if(flag_fall){
+    printf("fall\n");
+  }else if(flag_rise){
+    printf("raise\n");
+  }
 
   while (true) {
   }
