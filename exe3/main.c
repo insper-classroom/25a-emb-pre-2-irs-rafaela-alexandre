@@ -9,13 +9,14 @@ volatile int btn_status_R;
 volatile int btn_status_G;
 
 void btn_callback(uint gpio, uint32_t events) {
-  if (events == 0x4) { // fall edge
-    if (gpio == BTN_PIN_R)
+  // fall edge
+  if (gpio == BTN_PIN_R){
       btn_status_R = 1;
-    else if (gpio == BTN_PIN_G)
+  }else if (gpio == BTN_PIN_G){
       btn_status_G = 1;
   }
 }
+
 
 int main() {
   stdio_init_all();
