@@ -12,6 +12,7 @@ volatile int but_status_r;
 volatile int but_status_g;
 
 void btn_callback(uint gpio, uint32_t events){
+    printf("Interrupção no GPIO: %d\n e %d\n", gpio, events);
     if(gpio==BUT_R){
         but_status_r = 1;
     }else if (gpio==BUT_G){
@@ -37,13 +38,8 @@ int main() {
                                 true,
                                 &btn_callback);
 
-
-    gpio_set_irq_enabled(BUT_G,
-                GPIO_IRQ_EDGE_RISE,
-                true);
-                
-
-
+    gpio_set_irq_enabled(BUT_G, GPIO_IRQ_EDGE_RISE, true);
+   
     gpio_init(LED_R);
     gpio_set_dir(LED_R, GPIO_OUT);
     gpio_init(LED_G);
@@ -51,6 +47,8 @@ int main() {
 
     int led_status_r = 0;
     int led_status_g = 0;
+    int led_status_gg = 0;
+    
 
     while (true) {
         if(but_status_r){
@@ -59,12 +57,15 @@ int main() {
             printf("LED RED\n");
             gpio_put(LED_R, led_status_r);
 
-        }else if(but_status_g){
-            printf("LED GREEN\n");
+        } 
+        else if(but_status_g){
             but_status_g = 0;
-            gpio_put(LED_G, led_status_g);
-            led_status_g = !led_status_g; 
-            
+            if (led_status_gg){
+                printf("LED GREEN\n");
+                led_status_g = !led_status_g;
+                gpio_put(LED_G, led_status_g);
+            }
+            led_status_gg = !led_status_gg;
 
             
         }
