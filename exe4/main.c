@@ -12,7 +12,7 @@ volatile int but_status_r;
 volatile int but_status_g;
 
 void btn_callback(uint gpio, uint32_t events){
-    printf("Interrupção no GPIO: %d\n e %d\n", gpio, events);
+    // printf("Interrupção no GPIO: %d\n e %d\n", gpio, events);
     if(gpio==BUT_R){
         but_status_r = 1;
     }else if (gpio==BUT_G){
