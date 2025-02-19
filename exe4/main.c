@@ -46,31 +46,28 @@ int main() {
     gpio_set_dir(LED_G, GPIO_OUT);   
 
     int led_status_r = 0;
-    int led_status_rr = 1 ;
+    // int led_status_rr = 1 ;
     int led_status_g = 0;
-    int led_status_gg = 0;
+    // int led_status_gg = 0;
     
 
     while (true) {
         if(but_status_r){
             but_status_r = 0;
-            if(led_status_rr){
-                printf("LED RED\n");
-                led_status_r = !led_status_r;
-                gpio_put(LED_R, led_status_r);
-
-            }
-            led_status_rr = !led_status_rr;
+            
+            // printf("LED RED\n");
+            led_status_r = !led_status_r;
+            gpio_put(LED_R, led_status_r);
 
         } 
         else if(but_status_g){
             but_status_g = 0;
-            if (led_status_gg){
-                printf("LED GREEN\n");
-                led_status_g = !led_status_g;
-                gpio_put(LED_G, led_status_g);
-            }
-            led_status_gg = !led_status_gg;
+            
+            // printf("LED GREEN\n");
+            led_status_g = !led_status_g;
+            gpio_put(LED_G, led_status_g);
+            
+   
 
             
         }
